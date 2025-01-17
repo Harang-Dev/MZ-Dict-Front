@@ -135,7 +135,7 @@ function RegisterBox() {
             { required: true, message: "비밀번호를 확인하세요." },
             ({ getFieldValue }) => ({
               validator(_, value) {
-                if (!value || getFieldValue("passWord") === value) {
+                if (!value || getFieldValue("password") === value) {
                   return Promise.resolve();
                 }
                 return Promise.reject(new Error("비밀번호가 일치하지 않습니다."));
