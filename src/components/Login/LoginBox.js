@@ -133,7 +133,7 @@ function LoginBox() {
 
   const handleSubmit = (values) => {
     mutate(values);
-    console.log(values);
+
   };
 
   return (

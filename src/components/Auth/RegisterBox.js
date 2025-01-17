@@ -100,7 +100,6 @@ function RegisterBox() {
   const handleSubmit = (values) => {
     const { confirmPassword, ...filteredValues } = values;
     mutate(filteredValues);
-    console.log(filteredValues);
   };
 
   return (

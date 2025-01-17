@@ -87,7 +87,6 @@ function MyWordCard() {
 
   const handleClick = (word) => {
     navigate("/detail", { state:  word });
-    console.log("전달한 값입니다.", word);
   };
 
 

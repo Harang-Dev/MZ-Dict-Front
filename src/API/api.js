@@ -5,7 +5,6 @@ const API = process.env.REACT_APP_API;
 // 회원가입 API
 export const signUp = async (formData) => {
     const response = await axios.post(`${API}/user/signup`, formData);
-    console.log("데이터", response.data);
     return response.data;
 };
 
@@ -54,14 +53,12 @@ export const allWord = async (token) => {
     const response = await axios.get(`${API}/word/`, {
         headers,
     });
-    console.log(response);
     return response.data;
 };
 
 // wordbook 페이지에 쓸 비회원 모든 단어 조회 API
 export const allWordGuest = async () => {
     const response = await axios.get(`${API}/word/non-member`);
-    console.log("워드북", response.data);
     return response.data;
 }
 
@@ -131,7 +128,6 @@ export const aboutWord = async (token, wordId) => {
         params: { wordId },
         headers,
     });
-    console.log(response.data);
     return response.data;
 };
 
@@ -248,6 +244,5 @@ export const myWordScrap = async (token) => {
             scrapData.push(data[i]);
         }
     }
-    console.log(scrapData);
     return scrapData;
 };

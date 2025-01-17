@@ -89,8 +89,6 @@ function SearchButtonComponent() {
     onError: (error) => {
       const errorMessage = error.message || "검색 실패! 예상치 못한 에러가 발생했습니다.";
       message.error(errorMessage);
-      console.log(error);
-      console.log(searchText);
     },
   });
   

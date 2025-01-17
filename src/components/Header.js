@@ -78,7 +78,7 @@ const Header = () => {
       navigate("/login");
     }
     else if(token) {
-      navigate("myword");
+      navigate("/myword");
     }
   }
 

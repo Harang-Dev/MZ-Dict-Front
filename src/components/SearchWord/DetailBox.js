@@ -58,7 +58,6 @@ const DetailBox = () => {
   const data = location.state;
   
   useEffect(() => {
-    console.log("넘어온 데이터:", data.word);
   }, [data]);
 
   const { wordTitle, meaning, usingExample, id, scrapped, liked, likesCount, scrapCount, wordCreatedAt } = data;
@@ -122,9 +121,6 @@ const DetailBox = () => {
         content: '이 기능을 사용하려면 로그인해야 합니다. 로그인 화면으로 이동하시겠습니까?',
         okText: '확인',
         cancelText: '취소',
-        onCancel: () => {
-          console.log("취소 버튼 클릭");
-        },
         onOk: () => {
           navigate("/login");
         },
@@ -178,7 +174,6 @@ const DetailBox = () => {
         okText: '확인',
         cancelText: '취소',
         onCancel: () => {
-          console.log("취소 버튼 클릭");
         },
         onOk: () => {
           navigate("/login");

@@ -51,10 +51,6 @@ const CommentBox = () => {
 
       const wordId = id;
 
-      console.log("Token:", token);
-      console.log("Comment Text:", commentText);
-      console.log("Word ID:", wordId);
-
       return addComment(token, commentText, wordId);
     },
     onSuccess: (data) => {
@@ -62,7 +58,6 @@ const CommentBox = () => {
     },
     onError: (error) => {
       console.error("Error adding comment:", error);
-      console.log(token, commentText, wordId);
     }
   });
 
