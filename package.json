@@ -1,15 +1,19 @@
 {
-  "name": "example-react",
+  "name": "mzdict",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "@tanstack/react-query": "^5.62.16",
+    "antd": "^5.22.7",
+    "axios": "^1.7.9",
+    "cra-template": "1.2.0",
+    "jest-worker": "^29.7.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-query": "^3.39.3",
+    "react-router-dom": "^7.1.1",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "styled-components": "^6.1.14"
   },
   "scripts": {
     "start": "react-scripts start",
