@@ -221,7 +221,7 @@ const DetailBox = () => {
           </Tabs.TabPane>
           <Tabs.TabPane tab="Example" key="example" style={{ textAlign: 'left' }}>
             <Typography.Paragraph style={{ color: '#fff', textAlign: 'left' }}>
-              <Text>{usingExample} || 아직 예문이 없습니다. 빠른 시일내에 추가할게요 !</Text>
+              <Text>{usingExample || "아직 예문이 없습니다. 빠른 시일내에 추가할게요 !"}</Text>
             </Typography.Paragraph>
           </Tabs.TabPane>
         </CustomTabs>

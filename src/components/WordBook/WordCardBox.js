@@ -83,6 +83,7 @@ function WordCardBox() {
     queryKey: ["allWordData"],
     queryFn: () => allWordGuest(),
   });
+
   const mutation = useMutation({
     mutationFn: (wordId) => {
       return token ? aboutWord(token, wordId) : aboutWordGuest(wordId);
@@ -115,16 +116,7 @@ function WordCardBox() {
   return (
     <CardGrid>
       {data.map((word, index) => (
-        <OuterBox
-        key={index}
-        onClick={() => handleCardClick(word.id)}
-        style={{
-          animation: "fadeIn 0.5s ease",
-          animationDelay: `${index * 0.1}s`,
-          animationFillMode: "forwards",
-          opacity: 0,
-        }}
-      >
+        <OuterBox key={index} onClick={() => handleCardClick(word.id)}>
           <Header>
             <Title level={3} style={{ color: "white", margin: 0 }}>
               {word.wordTitle || "Title"}

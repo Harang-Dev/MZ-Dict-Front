@@ -31,7 +31,7 @@ const DetailPage = () => (
     <Header />
     <Content style={contentStyle}>
       <DetailBox />
-        <RandomCard />
+      <RandomCard />
     </Content>
     <Footer style={footerStyle}>Team H&M</Footer>
   </Layout>
