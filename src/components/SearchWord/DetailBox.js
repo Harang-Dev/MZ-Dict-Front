@@ -216,7 +216,7 @@ const DetailBox = () => {
         <CustomTabs activeKey={activeTab} onChange={handleTabChange} tabPosition="top">
           <Tabs.TabPane tab="Meaning" key="meaning" style={{ textAlign: 'left' }}>
             <Typography.Paragraph style={{ color: '#fff', textAlign: 'left' }}>
-              {meaning}
+              <Text>{meaning || "아직 뜻이 없습니다. 빠른 시일내에 추가할게요 !"}</Text>
             </Typography.Paragraph>
           </Tabs.TabPane>
           <Tabs.TabPane tab="Example" key="example" style={{ textAlign: 'left' }}>

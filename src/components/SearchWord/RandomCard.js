@@ -8,6 +8,11 @@ import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 
+const WrapContainer = styled.div`
+  margin: 5% 0;
+`;
+
+
 const OuterBox = styled.div`
   width: 382px;
   height: 158px;
@@ -19,6 +24,18 @@ const OuterBox = styled.div`
   flex-direction: column;
   padding: 16px;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-origin: center bottom;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  &.active {
+    transform: translateY(-30px) scale(1.05) rotateX(10deg);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
+  }
 `;
 
 const InnerBox = styled.div`
@@ -111,22 +128,29 @@ function RandomCard() {
     .sort(() => Math.random() - 0.5)
     .slice(0, 6);
 
-  const handleCardClick = (id) => {
+  const handleCardClick = (id, event) => {
     if (!id) {
       message.warning("유효한 검색어가 없습니다.");
       return;
     }
-    mutation.mutate(id);
+
+    const targetCard = event.currentTarget;
+    targetCard.classList.add("active");
+
+    setTimeout(() => {
+      targetCard.classList.remove("active");
+      mutation.mutate(id);
+    }, 500);
   };
 
   return (
-    <>
+    <WrapContainer>
       <TitleText level={2}>MZ 사전의 다른 단어들</TitleText>
       <CardGrid>
         {randomData.map((word, index) => (
           <OuterBox
             key={index}
-            onClick={() => handleCardClick(word.id)}
+            onClick={(event) => handleCardClick(word.id, event)}
           >
             <Header>
               <Title level={3} style={{ color: "white", margin: 0 }}>
@@ -158,7 +182,7 @@ function RandomCard() {
           </OuterBox>
         ))}
       </CardGrid>
-    </>
+    </WrapContainer>
   );
 }
 

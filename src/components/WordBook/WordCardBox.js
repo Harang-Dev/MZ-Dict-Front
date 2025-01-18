@@ -18,10 +18,21 @@ const OuterBox = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 16px;
-
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-origin: center bottom;
 
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  &.active {
+    transform: translateY(-30px) scale(1.05) rotateX(10deg);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
+  }
 `;
+
 
 const InnerBox = styled.div`
   width: 347px;
@@ -97,12 +108,19 @@ function WordCardBox() {
     },
   });
 
-  const handleCardClick = (wordId) => {
+  const handleCardClick = (wordId, event) => {
     if (!wordId) {
       message.warning("유효한 검색어가 없습니다.");
       return;
     }
-    mutation.mutate(wordId);
+  
+    const targetCard = event.currentTarget;
+    targetCard.classList.add("active");
+  
+    setTimeout(() => {
+      targetCard.classList.remove("active");
+      mutation.mutate(wordId);
+    }, 500);
   };
 
   if (isLoading) {
@@ -116,7 +134,10 @@ function WordCardBox() {
   return (
     <CardGrid>
       {data.map((word, index) => (
-        <OuterBox key={index} onClick={() => handleCardClick(word.id)}>
+        <OuterBox
+          key={index}
+          onClick={(event) => handleCardClick(word.id, event)}
+        >
           <Header>
             <Title level={3} style={{ color: "white", margin: 0 }}>
               {word.wordTitle || "Title"}
@@ -127,9 +148,7 @@ function WordCardBox() {
           </Header>
 
           <InnerBox>
-            <Text level={5}>
-              {word.meaning}
-            </Text>
+            <Text level={5}>{word.meaning}</Text>
           </InnerBox>
 
           <IconWrapper>
