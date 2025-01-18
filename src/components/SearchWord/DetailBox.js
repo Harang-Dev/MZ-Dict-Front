@@ -4,7 +4,7 @@ import { Card, Typography, Tabs, Space, Modal } from 'antd';
 import { LikeOutlined, PushpinOutlined, LikeFilled, PushpinFilled } from '@ant-design/icons';
 import TagBox from '../WordBook/TagBox';
 import { useMutation } from '@tanstack/react-query';
-import { addScrap, addLike, deleteLike, deleteScrap, aboutWord } from '../../API/api';  // 새로 API 추가
+import { addScrap, addLike, deleteLike, deleteScrap, aboutWord } from '../../API/api';
 import styled from 'styled-components';
 
 const OuterBox = styled(Card)`
@@ -74,20 +74,19 @@ const DetailBox = () => {
     setActiveTab(key);
   };
 
-  // 새로 데이터를 가져오는 API
+
   const fetchUpdatedData = async () => {
-    const response = await aboutWord(token, id);  // getWordData는 서버에서 데이터를 다시 가져오는 API
+    const response = await aboutWord(token, id);
     const { likesCount, scrapCount } = response;
     setCurrentLikesCount(likesCount);
     setCurrentScrapCount(scrapCount);
   };
 
-  // 스크랩 추가
   const { mutate: scrapMutate } = useMutation({
     mutationFn: () => addScrap(token, id),
     onSuccess: () => {
       setIsScraped(true);
-      fetchUpdatedData();  // 데이터 새로 고침
+      fetchUpdatedData();
       Modal.success({
         title: '저장 완료',
         content: '스크랩 했습니다!',
@@ -98,12 +97,11 @@ const DetailBox = () => {
     },
   });
 
-  // 스크랩 삭제
   const { mutate: deleteScrapMutate } = useMutation({
     mutationFn: () => deleteScrap(token, id),
     onSuccess: () => {
       setIsScraped(false);
-      fetchUpdatedData();  // 데이터 새로 고침
+      fetchUpdatedData();
       Modal.success({
         title: '저장 완료',
         content: '스크랩을 삭제했어요!',
@@ -134,12 +132,11 @@ const DetailBox = () => {
     }
   };
 
-  // 좋아요 추가
   const { mutate: likeMutate } = useMutation({
     mutationFn: () => addLike(token, id),
     onSuccess: () => {
       setIsLiked(true);
-      fetchUpdatedData();  // 데이터 새로 고침
+      fetchUpdatedData();
       Modal.success({
         title: '저장 완료',
         content: '좋아요를 했습니다!',
@@ -150,12 +147,12 @@ const DetailBox = () => {
     },
   });
 
-  // 좋아요 삭제
+
   const { mutate: deleteLikeMutate } = useMutation({
     mutationFn: () => deleteLike(token, id),
     onSuccess: () => {
       setIsLiked(false);
-      fetchUpdatedData();  // 데이터 새로 고침
+      fetchUpdatedData();
       Modal.success({
         title: '저장 완료',
         content: '좋아요를 삭제했어요!',
@@ -224,7 +221,7 @@ const DetailBox = () => {
           </Tabs.TabPane>
           <Tabs.TabPane tab="Example" key="example" style={{ textAlign: 'left' }}>
             <Typography.Paragraph style={{ color: '#fff', textAlign: 'left' }}>
-              {usingExample}
+              <Text>{usingExample} || 아직 예문이 없습니다. 빠른 시일내에 추가할게요 !</Text>
             </Typography.Paragraph>
           </Tabs.TabPane>
         </CustomTabs>

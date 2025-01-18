@@ -3,12 +3,11 @@ import styled from "styled-components";
 import { Typography, Space, message } from "antd";
 import { LikeOutlined, CommentOutlined, PushpinOutlined } from "@ant-design/icons";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { allWordGuest, aboutWord, aboutWordGuest } from "../../API/api"; // aboutWord, aboutWordGuest 임포트
+import { allWordGuest, aboutWord, aboutWordGuest } from "../../API/api";
 import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 
-// Styled Components
 const OuterBox = styled.div`
   width: 382px;
   height: 158px;
@@ -48,7 +47,7 @@ const IconText = styled(Space)`
   color: #fff;
   font-size: 14px;
   display: flex;
-  align-items: center; /* 아이콘과 텍스트 수평 정렬 */
+  align-items: center;
 `;
 
 const IconWrapper = styled.div`
@@ -77,37 +76,31 @@ const Text = styled(Title)`
 `;
 
 function WordCardBox() {
-  const navigate = useNavigate(); // 네비게이션 훅
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["allWordData"],
     queryFn: () => allWordGuest(),
   });
-
-  // 리액트 쿼리 mutation 설정
   const mutation = useMutation({
     mutationFn: (wordId) => {
       return token ? aboutWord(token, wordId) : aboutWordGuest(wordId);
     },
     onSuccess: (data) => {
-      // 데이터 성공적으로 받아오면 detail 페이지로 이동
       navigate("/detail", { state: data });
     },
     onError: (error) => {
-      // 에러 발생 시 메시지 출력
       console.error("API 호출 실패:", error);
       message.error("데이터를 가져오는 데 실패했습니다.");
     },
   });
 
-  // 카드 클릭 핸들러
   const handleCardClick = (wordId) => {
     if (!wordId) {
       message.warning("유효한 검색어가 없습니다.");
       return;
     }
-    // ID 전달하여 mutation 호출
     mutation.mutate(wordId);
   };
 
@@ -122,8 +115,16 @@ function WordCardBox() {
   return (
     <CardGrid>
       {data.map((word, index) => (
-        <OuterBox key={index} onClick={() => handleCardClick(word.id)}> {/* 클릭 시 handleCardClick 호출 */}
-          {/* Header: Title and Date */}
+        <OuterBox
+        key={index}
+        onClick={() => handleCardClick(word.id)}
+        style={{
+          animation: "fadeIn 0.5s ease",
+          animationDelay: `${index * 0.1}s`,
+          animationFillMode: "forwards",
+          opacity: 0,
+        }}
+      >
           <Header>
             <Title level={3} style={{ color: "white", margin: 0 }}>
               {word.wordTitle || "Title"}
@@ -133,14 +134,12 @@ function WordCardBox() {
             </Title>
           </Header>
 
-          {/* Inner Box with Text Overflow Handling */}
           <InnerBox>
             <Text level={5}>
               {word.meaning}
             </Text>
           </InnerBox>
 
-          {/* Icons for Likes, Comments, and Saves */}
           <IconWrapper>
             <IconText style={{ marginRight: "10px" }}>
               <LikeOutlined style={{ color: "#fff" }} />

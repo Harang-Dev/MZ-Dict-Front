@@ -8,7 +8,6 @@ import { aboutWord,aboutWordGuest } from "../../API/api";
 
 const { Title } = Typography;
 
-// Styled Components
 const OuterBox = styled.div`
   width: 382px;
   height: 158px;
@@ -81,30 +80,25 @@ function SearchCard() {
   const token = localStorage.getItem("token");
   const searchData = location.state || [];
 
-  // 리액트 쿼리 mutation 설정
+
   const mutation = useMutation({
     mutationFn: (wordId) => {
-      // token이 있을 경우 aboutWord 호출, 없으면 aboutWordGuest 호출
       return token ? aboutWord(token, wordId) : aboutWordGuest(wordId);
     },
     onSuccess: (data) => {
-      // 데이터 성공적으로 받아오면 detail 페이지로 이동
       navigate("/detail", { state: data });
     },
     onError: (error) => {
-      // 에러 발생 시 메시지 출력
       console.error("API 호출 실패:", error);
       message.error("데이터를 가져오는 데 실패했습니다.");
     },
   });
 
-  // 카드 클릭 핸들러
   const handleCardClick = (id) => {
     if (!id) {
       message.warning("유효한 검색어가 없습니다.");
       return;
     }
-    // ID 전달하여 mutation 호출
     mutation.mutate(id);
   };
 
@@ -114,7 +108,7 @@ function SearchCard() {
         searchData.map((word, index) => (
           <OuterBox
             key={index}
-            onClick={() => handleCardClick(word.id)} // 클릭 시 id를 전달
+            onClick={() => handleCardClick(word.id)}
           >
             <Header>
               <Title level={3} style={{ color: "white", margin: 0 }}>

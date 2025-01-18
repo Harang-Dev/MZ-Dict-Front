@@ -61,9 +61,9 @@ const Header = () => {
   const navigate = useNavigate();
 
   const userQuery = useQuery({
-    queryKey: ["userDetail", token], // 쿼리 키
-    queryFn: () => userDetail(token), // 데이터 패칭 함수
-    enabled: !!token, // token이 있을 때만 실행
+    queryKey: ["userDetail", token],
+    queryFn: () => userDetail(token),
+    enabled: !!token,
   });
 
   const handleLogout = () => {

@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 
-// Styled Components
 const OuterBox = styled.div`
   width: 382px;
   height: 158px;
@@ -89,9 +88,8 @@ function RandomCard() {
     enabled: !!token,
   });
 
-  // useMutation 훅을 추가하여 카드 클릭 시 API 호출
   const mutation = useMutation({
-    mutationFn: (wordId) => aboutWordGuest(wordId), // wordId를 API 함수로 전달
+    mutationFn: (wordId) => aboutWordGuest(wordId),
     onSuccess: (data) => {
       navigate("/detail", { state: data });
     },
@@ -109,31 +107,27 @@ function RandomCard() {
     return <OuterBox>Error: {error.message}</OuterBox>;
   }
 
-  // 랜덤하게 6개 데이터 뽑기
   const randomData = data
-    .sort(() => Math.random() - 0.5) // 데이터를 무작위로 섞기
-    .slice(0, 6); // 상위 6개 데이터만 추출
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 6);
 
-  // 카드 클릭 핸들러
   const handleCardClick = (id) => {
     if (!id) {
       message.warning("유효한 검색어가 없습니다.");
       return;
     }
-    mutation.mutate(id); // mutation을 사용하여 API 호출
+    mutation.mutate(id);
   };
 
   return (
     <>
-      {/* 타이틀 추가 */}
       <TitleText level={2}>MZ 사전의 다른 단어들</TitleText>
       <CardGrid>
         {randomData.map((word, index) => (
           <OuterBox
             key={index}
-            onClick={() => handleCardClick(word.id)} // 클릭 시 id를 전달
+            onClick={() => handleCardClick(word.id)}
           >
-            {/* Header: Title and Date */}
             <Header>
               <Title level={3} style={{ color: "white", margin: 0 }}>
                 {word.wordTitle || "Title"}
@@ -143,12 +137,10 @@ function RandomCard() {
               </Title>
             </Header>
 
-            {/* Inner Box with Text Overflow Handling */}
             <InnerBox>
               <Text level={5}>{word.meaning}</Text>
             </InnerBox>
 
-            {/* Icons for Likes, Comments, and Saves */}
             <IconWrapper>
               <IconText style={{ marginRight: "10px" }}>
                 <LikeOutlined style={{ color: "#fff" }} />

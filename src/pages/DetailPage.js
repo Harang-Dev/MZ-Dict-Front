@@ -2,7 +2,6 @@ import React from "react";
 import { Layout } from "antd";
 import Header from "../components/Header";
 import DetailBox from "../components/SearchWord/DetailBox";
-// import CommentBox from "../components/SearchWord/CommentBox";
 import RandomCard from "../components/SearchWord/RandomCard";
 
 const { Footer, Content } = Layout;
@@ -33,7 +32,6 @@ const DetailPage = () => (
     <Content style={contentStyle}>
       <DetailBox />
         <RandomCard />
-      {/* <CommentBox /> */}
     </Content>
     <Footer style={footerStyle}>Team H&M</Footer>
   </Layout>

@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 
-// Styled Components
 const OuterBox = styled.div`
   width: 382px;
   height: 158px;
@@ -47,7 +46,7 @@ const IconText = styled(Space)`
   color: #fff;
   font-size: 14px;
   display: flex;
-  align-items: center; /* 아이콘과 텍스트 수평 정렬 */
+  align-items: center;
 `;
 
 const IconWrapper = styled.div`
@@ -94,7 +93,6 @@ function MyWordCard() {
     <CardGrid>
       {data?.map((word, index) => (
        <OuterBox key={index} onClick={() => handleClick(word)}>
-          {/* Header: Title and Date */}
           <Header>
             <Title level={3} style={{ color: "white", margin: 0 }}>
               {word.wordTitle || "Title"}
@@ -104,12 +102,10 @@ function MyWordCard() {
             </Title>
           </Header>
 
-          {/* Inner Box with Text Overflow Handling */}
           <InnerBox>
             <Text level={5}>{word.meaning || "Meaning"}</Text>
           </InnerBox>
 
-          {/* Icons for Likes, Comments, and Saves */}
           <IconWrapper>
             <IconText style={{ marginRight: "10px" }}>
               <LikeOutlined style={{ color: "#fff" }} />

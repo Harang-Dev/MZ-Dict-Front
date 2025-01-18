@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { SearchOutlined } from "@ant-design/icons";
 import { useMutation } from "@tanstack/react-query";
-import { searchWord, searchWordGuest } from "../API/api";  // searchWord와 searchWordGuest를 모두 import
+import { searchWord, searchWordGuest } from "../API/api";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 

@@ -23,14 +23,14 @@ const BackgroundImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
-  opacity: 0.2; /* 이미지에만 투명도 적용 */
-  pointer-events: none; /* 클릭 방지 */
+  opacity: 0.2;
+  pointer-events: none;
 `;
 
 const SubTitle = styled.h2`
   font-size: 1.5rem;
   font-weight: normal;
-  z-index: 1; /* 텍스트가 이미지 위로 오도록 설정 */
+  z-index: 1;
 `;
 
 const MainTitle = styled.h1`
