@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Typography, Space, message } from "antd";
 import { LikeOutlined, CommentOutlined, PushpinOutlined } from "@ant-design/icons";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { allWord, aboutWordGuest } from "../../API/api";
+import { allWordGuest, allWord, aboutWordGuest } from "../../API/api";
 import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
@@ -101,8 +101,8 @@ function RandomCard() {
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["allWordData"],
-    queryFn: () => allWord(token),
-    enabled: !!token,
+    queryFn: () => (token ? allWord(token) : allWordGuest()),
+    enabled: true,
   });
 
   const mutation = useMutation({
